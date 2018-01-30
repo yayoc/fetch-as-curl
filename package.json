@@ -1,0 +1,27 @@
+{
+  "name": "fetch-as-curl",
+  "version": "0.0.1",
+  "description": "Making a cURL command from fetch API.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yayoc/fetch-as-curl.git"
+  },
+  "keywords": [
+    "fetch"
+  ],
+  "author": "yayoc <hi@yayoc.com> (http://yayoc.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yayoc/fetch-as-curl/issues"
+  },
+  "homepage": "https://github.com/yayoc/fetch-as-curl#readme",
+  "devDependencies": {
+    "typescript": "^2.6.2"
+  }
+}

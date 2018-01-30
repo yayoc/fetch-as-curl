@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist",
+    "target": "es6",
+    "declaration": true,
+    "noImplicitAny": true,
+    "inlineSourceMap": false,
+    "noEmitOnError": false,
+    "strictNullChecks": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["src"]
+}
