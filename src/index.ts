@@ -45,10 +45,11 @@ function log(input: RequestInfo, init?: RequestInit | undefined): void {
     });
   };
 
+  const style = "color: #ec9439; font-weight: bold";
   const command =
-    `curl -X ${method} ` +
+    `curl -X ${method}` +
     (body.length > 0 ? `${body(init.body).join("")} ` : "") +
     (headers.length > 0 ? `${headers(init.headers).join("")} ` : "") +
     `"${input}"`;
-  console.log(command);
+  console.log(`%c ${command}`, style);
 }
