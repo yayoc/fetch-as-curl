@@ -1,0 +1,16 @@
+<html>
+
+<head>
+  <title>fetch-as-curl example</title>
+  <script src="../dist/index.js"></script>
+  <script type="text/javascript">
+    var url = "https://hacker-news.firebaseio.com/v0/item/8863.json?print=pretty";
+    fetch(url, { method: "POST", headers: { Authorization: "Bearer token" } })
+  </script>
+</head>
+
+<body>
+  <h1>Open console on your browser.</h1>
+</body>
+
+</html>
