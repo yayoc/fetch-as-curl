@@ -11,6 +11,16 @@
     return fetch(input, init);
   };
 
+  const bannerStyles = [
+    "display: block",
+    "background: #03A9F4",
+    "padding: 10px 5px",
+    "line-height: 40px",
+    "text-align: center",
+    "font-size:15px",
+    "font-weight: bold"
+  ];
+  console.log("%c welcome fetch-as-curl", bannerStyles.join(";"));
   _w.fetch = f(_w.fetch);
 })(window);
 
@@ -22,34 +32,37 @@ enum HttpMethod {
   Delete = "DELETE"
 }
 
+const commandStyle = "color: white; background: green; display: block;";
+
+const getCommands = (
+  input: any | undefined,
+  template: (key: string, value: string) => string
+): string[] => {
+  if (!input) return [];
+  return Object.keys(input).map((key: string) => {
+    const value: string = input[key];
+    return template(key, value);
+  });
+};
+
 function log(input: RequestInfo, init?: RequestInit | undefined): void {
   if (!init) {
-    console.log(`curl -X GET "${input}"`);
+    console.log(`%c curl -X GET "${input}"`, commandStyle);
     return;
   }
   const method = init.method || HttpMethod.Get;
+  const headers = getCommands(
+    init.headers,
+    (key, value) => `-H "${key}: ${value}"`
+  );
+  const body = getCommands(init.body, (key, value) => `-d "${key}: ${value}"`);
 
-  const headers = (headers: any | undefined): string[] => {
-    if (!headers) return [];
-    return Object.keys(headers).map((key: string) => {
-      const value: string = headers[key];
-      return `-H "${key}: ${value}"`;
-    });
-  };
-
-  const body = (body: any | undefined): string[] => {
-    if (!body) return [];
-    return Object.keys(body).map((key: string) => {
-      const value: string = body[key];
-      return `-d "${key}: ${value}"`;
-    });
-  };
-
-  const style = "color: #ec9439; font-weight: bold";
   const command =
-    `curl -X ${method}` +
-    (body.length > 0 ? `${body(init.body).join("")} ` : "") +
-    (headers.length > 0 ? `${headers(init.headers).join("")} ` : "") +
+    `curl -X ${method} ` +
+    (body.length > 0 ? `${body.join("")} ` : "") +
+    (headers.length > 0 ? `${headers.join("")} ` : "") +
     `"${input}"`;
-  console.log(`%c ${command}`, style);
+  console.groupCollapsed(`${method}: ${input}`);
+  console.log(`%c ${command}`, commandStyle);
+  console.groupEnd();
 }
