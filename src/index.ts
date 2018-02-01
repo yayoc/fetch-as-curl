@@ -32,8 +32,6 @@ enum HttpMethod {
   Delete = "DELETE"
 }
 
-const commandStyle = "color: white; background: green; display: block;";
-
 const getCommands = (
   input: any | undefined,
   template: (key: string, value: string) => string
@@ -45,24 +43,35 @@ const getCommands = (
   });
 };
 
-function log(input: RequestInfo, init?: RequestInit | undefined): void {
+const getHttpMethod = (init: RequestInit | undefined): string =>
+  init ? init.method || HttpMethod.Get : HttpMethod.Get;
+
+export const getCurlCommand = (
+  input: RequestInfo,
+  init?: RequestInit | undefined
+): string => {
   if (!init) {
-    console.log(`%c curl -X GET "${input}"`, commandStyle);
-    return;
+    return `curl -X GET "${input}"`;
   }
-  const method = init.method || HttpMethod.Get;
+  const method = getHttpMethod(init);
   const headers = getCommands(
     init.headers,
     (key, value) => `-H "${key}: ${value}"`
   );
   const body = getCommands(init.body, (key, value) => `-d "${key}: ${value}"`);
 
-  const command =
+  return (
     `curl -X ${method} ` +
     (body.length > 0 ? `${body.join("")} ` : "") +
     (headers.length > 0 ? `${headers.join("")} ` : "") +
-    `"${input}"`;
-  console.groupCollapsed(`${method}: ${input}`);
+    `"${input}"`
+  );
+};
+
+function log(input: RequestInfo, init?: RequestInit | undefined): void {
+  const command = getCurlCommand(input, init);
+  console.groupCollapsed(`${getHttpMethod(init)}: ${input}`);
+  const commandStyle = "color: white; background: green; display: block;";
   console.log(`%c ${command}`, commandStyle);
   console.groupEnd();
 }
