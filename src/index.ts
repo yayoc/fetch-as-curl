@@ -15,12 +15,12 @@
     "display: block",
     "background: #03A9F4",
     "padding: 10px 5px",
-    "line-height: 40px",
+    "line-height: 60px",
     "text-align: center",
-    "font-size:15px",
+    "font-size:18px",
     "font-weight: bold"
   ];
-  console.log("%c welcome fetch-as-curl", bannerStyles.join(";"));
+  console.log("%cfetch-as-curl", bannerStyles.join(";"));
   _w.fetch = f(_w.fetch);
 })(window);
 
@@ -32,14 +32,11 @@ enum HttpMethod {
   Delete = "DELETE"
 }
 
-const getCommands = (
-  input: any | undefined,
-  template: (key: string, value: string) => string
-): string[] => {
+const getHeaders = (input: any | undefined): string[] => {
   if (!input) return [];
   return Object.keys(input).map((key: string) => {
     const value: string = input[key];
-    return template(key, value);
+    return `-H "${key}: ${value}"`;
   });
 };
 
@@ -54,16 +51,12 @@ export const getCurlCommand = (
     return `curl -X GET "${input}"`;
   }
   const method = getHttpMethod(init);
-  const headers = getCommands(
-    init.headers,
-    (key, value) => `-H "${key}: ${value}"`
-  );
-  const body = getCommands(init.body, (key, value) => `-d "${key}: ${value}"`);
+  const headers = getHeaders(init.headers);
 
   return (
     `curl -X ${method} ` +
-    (body.length > 0 ? `${body.join("")} ` : "") +
-    (headers.length > 0 ? `${headers.join("")} ` : "") +
+    (headers.length > 0 ? `${headers.join(" ")} ` : "") +
+    (init.body ? `-d "${init.body}" ` : "") +
     `"${input}"`
   );
 };
