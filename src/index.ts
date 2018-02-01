@@ -13,7 +13,8 @@
 
   const bannerStyles = [
     "display: block",
-    "background: #03A9F4",
+    "background: #35A7FF",
+    "color: #FFE74C",
     "padding: 10px 5px",
     "line-height: 60px",
     "text-align: center",
@@ -64,7 +65,7 @@ export const getCurlCommand = (
 function log(input: RequestInfo, init?: RequestInit | undefined): void {
   const command = getCurlCommand(input, init);
   console.groupCollapsed(`${getHttpMethod(init)}: ${input}`);
-  const commandStyle = "color: white; background: green; display: block;";
+  const commandStyle = "color: #000; display: block; line-height: 30px;";
   console.log(`%c ${command}`, commandStyle);
   console.groupEnd();
 }
