@@ -1,12 +1,16 @@
 # fetch-as-curl
 
-Making cURL command output.
+Making [cURL](https://curl.haxx.se/) command output on browser console when using [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
 ## Fetures
 
-* Make a cURL command per fetch function.
-* Same interface with fetch API.
-* Only work on development.
+* Make a cURL command on browser console.
+* Same interface with Fetch API.
+
+## Installation
+
+Using `npm`.  
+`npm i fetch-as-curl`
 
 ## Example
 
@@ -14,10 +18,10 @@ Making cURL command output.
 import "fetch-as-curl";
 const options = {
   method: "POST",
-  body: {
+  body: JSON.stringify({
     rating: 5,
     comment: "cool!"
-  },
+  }),
   headers: {
     Authorization: "Bearer foo",
     "Content-Type": "application/json"

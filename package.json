@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git+https://github.com/yayoc/fetch-as-curl.git"
   },
-  "keywords": ["fetch"],
+  "keywords": ["fetch", "cURL", "browser", "console", "TypeScript"],
   "author": "yayoc <hi@yayoc.com> (http://yayoc.com)",
   "license": "MIT",
   "bugs": {
