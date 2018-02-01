@@ -4,8 +4,8 @@
   "description": "Making a cURL command from fetch API.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "build:watch": "tsc -w",
+    "build": "webpack",
+    "build:watch": "webpack -w",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -24,7 +24,9 @@
     "@types/jest": "^22.1.1",
     "jest": "^22.1.4",
     "ts-jest": "^22.0.2",
-    "typescript": "^2.6.2"
+    "ts-loader": "^3.4.0",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0"
   },
   "jest": {
     "moduleFileExtensions": ["ts", "tsx", "js"],
