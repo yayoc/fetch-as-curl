@@ -2,6 +2,8 @@
 
 Making [cURL](https://curl.haxx.se/) command output on browser console when using [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
+![fetch-as-curl example](./demo.png)
+
 ## Fetures
 
 * Make a cURL command on browser console.
